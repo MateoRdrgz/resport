@@ -41,6 +41,12 @@ class Player
     #[ORM\ManyToOne]
     private ?Country $CountryId = null;
 
+    #[ORM\ManyToOne]
+    private ?Team $teamId = null;
+
+    #[ORM\ManyToOne]
+    private ?Game $GameId = null;
+
     public function isActive(): ?bool
     {
         return $this->active;
@@ -64,7 +70,7 @@ class Player
 
         return $this;
     }
-    public function getModifiedAt(): ?\DateTimeImmutable
+    public function getModifiedAt(): ?\DateTime
     {
         return $this->modifiedAt;
     }
@@ -144,6 +150,30 @@ class Player
     public function setCountryId(?Country $CountryId): static
     {
         $this->CountryId = $CountryId;
+
+        return $this;
+    }
+
+    public function getTeamId(): ?Team
+    {
+        return $this->teamId;
+    }
+
+    public function setTeamId(?Team $teamId): static
+    {
+        $this->teamId = $teamId;
+
+        return $this;
+    }
+
+    public function getGameId(): ?Game
+    {
+        return $this->GameId;
+    }
+
+    public function setGameId(?Game $GameId): static
+    {
+        $this->GameId = $GameId;
 
         return $this;
     }
