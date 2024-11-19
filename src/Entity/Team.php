@@ -23,7 +23,7 @@ class Team
     private ?string $imageUrl = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $modifiedAt = null;
+    private ?\DateTime $modifiedAt = null;
 
     #[ORM\ManyToOne]
     private ?Country $locationId = null;
@@ -69,7 +69,7 @@ class Team
         return $this;
     }
 
-    public function getModifiedAt(): ?\DateTimeImmutable
+    public function getModifiedAt(): ?\DateTime
     {
         return $this->modifiedAt;
     }
