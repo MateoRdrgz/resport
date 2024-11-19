@@ -28,6 +28,9 @@ class Team
     #[ORM\ManyToOne]
     private ?Country $locationId = null;
 
+    #[ORM\ManyToOne]
+    private ?Game $gameId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class Team
     public function setLocationId(?Country $locationId): static
     {
         $this->locationId = $locationId;
+
+        return $this;
+    }
+
+    public function getGameId(): ?Game
+    {
+        return $this->gameId;
+    }
+
+    public function setGameId(?Game $gameId): static
+    {
+        $this->gameId = $gameId;
 
         return $this;
     }
