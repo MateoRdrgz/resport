@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TeamController!{% endblock %}
+
+{% block stylesheets %}
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
+
+
+{% block body %}
+    <style>
+        body {
+            background-color: #555555;
+            color: white;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #333333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+
+
+            div {
+                img {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+        }
+
+        .card {
+            margin: 2em auto;
+            max-width: 600px;
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: #282828;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+
+    <div class="header">
+        <div class="">
+            <img src="https://cdn.worldvectorlogo.com/logos/svg-2.svg" alt="une image">
+        </div>
+        <div>
+            <label>
+                <input type="text" class="form-control" placeholder="Rechercher une équipe">
+            </label>
+        </div>
+        <div>
+            <i class="fa fa-user"></i>
+        </div>
+    </div>
+    {% if teamData is defined %}
+        {% for team in teamData %}
+            <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ team.current_team.name }}</h3>
+                </div>
+
+
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
