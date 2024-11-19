@@ -26,6 +26,9 @@ class Saison
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $full_name = null;
 
+    #[ORM\ManyToOne]
+    private ?League $leagueId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -82,6 +85,18 @@ class Saison
     public function setFullName(?string $full_name): static
     {
         $this->full_name = $full_name;
+
+        return $this;
+    }
+
+    public function getLeagueId(): ?League
+    {
+        return $this->leagueId;
+    }
+
+    public function setLeagueId(?League $leagueId): static
+    {
+        $this->leagueId = $leagueId;
 
         return $this;
     }
