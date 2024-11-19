@@ -21,7 +21,7 @@ class Player
     private ?string $name = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $modifiedAt = null;
+    private ?\DateTime $modifiedAt = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $age = null;
