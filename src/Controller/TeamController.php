@@ -19,13 +19,14 @@ class TeamController extends AbstractController
     #[Route('/team', name: 'app_team')]
     public function index(): Response
     {
-        
+        dump($_ENV['ES_TOKEN']);
+
         $response = $this->httpClient->request('GET', 'https://api.pandascore.co/lol/matches/past', [
         'headers' => [
             'accept' => 'application/json',
-            'authorization' => 'Bearer BE1tE3ChZhTXr6vFreod6niOOc9qseRvfEr7RjFTHnf7lswY3Dk',
-        ],
+            'authorization' => 'Bearer ' . $_ENV['ES_TOKEN'],        ],
         ]);
+
 
         dd($response->toArray());
         return $this->render('team/index.html.twig', [
