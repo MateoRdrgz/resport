@@ -23,7 +23,7 @@ class User
     private string $role;
 
     #[ORM\Column(type: 'datetime')]
-    private \DateTimeInterface $created_at;
+    private \DateTimeInterface $createdAt;
 
     #[ORM\Column(length: 255,type: 'string')]
     private string $password;
@@ -89,12 +89,12 @@ class User
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $created_at;
 
         return $this;
     }

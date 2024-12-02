@@ -15,15 +15,15 @@ class Opponent
     private int $id;
 
     #[ORM\ManyToOne(targetEntity: Matchs::class)]
-    private Matchs $matchId;
+    private Matchs $match;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'], targetEntity: Team::class)]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Team $opponentIdTeam = null;
+    private ?Team $opponentTeam = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'], targetEntity: Player::class)]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Player $opponentIdPlayer = null;
+    private ?Player $opponentPlayer = null;
 
     public function getId(): int
     {
@@ -39,36 +39,36 @@ class Opponent
 
     public function getMatchId(): Matchs
     {
-        return $this->matchId;
+        return $this->match;
     }
 
-    public function setMatchId(Matchs $matchId): static
+    public function setMatchId(Matchs $match): static
     {
-        $this->matchId = $matchId;
+        $this->match = $match;
 
         return $this;
     }
 
     public function getOpponentIdTeam(): ?Team
     {
-        return $this->opponentIdTeam;
+        return $this->opponentTeam;
     }
 
-    public function setOpponentIdTeam(?Team $opponentIdTeam): static
+    public function setOpponentIdTeam(?Team $opponentTeam): static
     {
-        $this->opponentIdTeam = $opponentIdTeam;
+        $this->opponentTeam = $opponentTeam;
 
         return $this;
     }
 
     public function getOpponentIdPlayer(): ?Player
     {
-        return $this->opponentIdPlayer;
+        return $this->opponentPlayer;
     }
 
-    public function setOpponentIdPlayer(?Player $opponentIdPlayer): static
+    public function setOpponentIdPlayer(?Player $opponentPlayer): static
     {
-        $this->opponentIdPlayer = $opponentIdPlayer;
+        $this->opponentPlayer = $opponentPlayer;
 
         return $this;
     }

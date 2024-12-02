@@ -27,11 +27,11 @@ class Team
 
     #[ORM\ManyToOne(targetEntity: Country::class)]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Country $locationId = null;
+    private ?Country $location = null;
 
     #[ORM\ManyToOne(targetEntity: Game::class)]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Game $gameId = null;
+    private ?Game $game = null;
 
     public function getId(): ?int
     {
@@ -86,26 +86,26 @@ class Team
         return $this;
     }
 
-    public function getLocationId(): ?Country
+    public function getLocation(): ?Country
     {
-        return $this->locationId;
+        return $this->location;
     }
 
-    public function setLocationId(?Country $locationId): static
+    public function setLocationId(?Country $location): static
     {
-        $this->locationId = $locationId;
+        $this->location = $location;
 
         return $this;
     }
 
-    public function getGameId(): ?Game
+    public function getGame(): ?Game
     {
-        return $this->gameId;
+        return $this->game;
     }
 
-    public function setGameId(?Game $gameId): static
+    public function setGameId(?Game $game): static
     {
-        $this->gameId = $gameId;
+        $this->game = $game;
 
         return $this;
     }

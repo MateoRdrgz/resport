@@ -22,20 +22,22 @@ class Matchs
     private ?\DateTimeInterface $endAt = null;
 
     #[ORM\ManyToOne(targetEntity: League::class)]
-    private League $leagueId;
+    private League $league;
 
-    #[ORM\Column(nullable: true, type: 'integer')]
-    private ?int $winnerIdTeam = null;
+    #[ORM\ManyToOne(targetEntity: Team::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Team $winnerTeam = null;
 
-    #[ORM\Column(nullable: true, type: 'integer')]
-    private ?int $winnerIdPlayer = null;
+    #[ORM\ManyToOne(targetEntity: Player::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Player $winnerPlayer = null;
 
     #[ORM\ManyToOne(targetEntity: Saison::class)]
-    private Saison $seasonId;
+    private Saison $season;
 
     #[ORM\ManyToOne(targetEntity: Game::class)]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Game $gameId = null;
+    private ?Game $game = null;
 
     #[ORM\Column(length: 255,type:'string')]
     private string $status;
@@ -50,8 +52,8 @@ class Matchs
     {
         $this->BeginAt = $BeginAt;
         $this->endAt = $endAt;
-        $this->leagueId = $leagueId;
-        $this->seasonId = $seasonId;
+        $this->league = $leagueId;
+        $this->season = $seasonId;
         $this->status = $status;
         $this->name = $name;
         $this->modifiedAt = $modifiedAt;
@@ -93,65 +95,7 @@ class Matchs
         return $this;
     }
 
-    public function getLeagueId(): League
-    {
-        return $this->leagueId;
-    }
 
-    public function setLeagueId(League $leagueId): static
-    {
-        $this->leagueId = $leagueId;
-
-        return $this;
-    }
-
-    public function getWinnerIdTeam(): ?int
-    {
-        return $this->winnerIdTeam;
-    }
-
-    public function setWinnerIdTeam(?int $winnerIdTeam): static
-    {
-        $this->winnerIdTeam = $winnerIdTeam;
-
-        return $this;
-    }
-
-    public function getWinnerIdPlayer(): ?int
-    {
-        return $this->winnerIdPlayer;
-    }
-
-    public function setWinnerIdPlayer(?int $winnerIdPlayer): static
-    {
-        $this->winnerIdPlayer = $winnerIdPlayer;
-
-        return $this;
-    }
-
-    public function getSeasonId(): Saison
-    {
-        return $this->seasonId;
-    }
-
-    public function setSeasonId(Saison $seasonId): static
-    {
-        $this->seasonId = $seasonId;
-
-        return $this;
-    }
-
-    public function getGameId(): Game
-    {
-        return $this->gameId;
-    }
-
-    public function setGameId(Game $gameId): static
-    {
-        $this->gameId = $gameId;
-
-        return $this;
-    }
 
     public function getStatus(): string
     {
@@ -185,6 +129,66 @@ class Matchs
     public function setModifiedAt(\DateTimeInterface $modifiedAt): static
     {
         $this->modifiedAt = $modifiedAt;
+
+        return $this;
+    }
+
+    public function getLeague(): League
+    {
+        return $this->league;
+    }
+
+    public function setLeague(League $league): static
+    {
+        $this->league = $league;
+
+        return $this;
+    }
+
+    public function getWinnerTeam(): ?Team
+    {
+        return $this->winnerTeam;
+    }
+
+    public function setWinnerTeam(?Team $winnerTeam): static
+    {
+        $this->winnerTeam = $winnerTeam;
+
+        return $this;
+    }
+
+    public function getWinnerPlayer(): ?Player
+    {
+        return $this->winnerPlayer;
+    }
+
+    public function setWinnerPlayer(?Player $winnerPlayer): static
+    {
+        $this->winnerPlayer = $winnerPlayer;
+
+        return $this;
+    }
+
+    public function getSeason(): Saison
+    {
+        return $this->season;
+    }
+
+    public function setSeason(Saison $season): static
+    {
+        $this->season = $season;
+
+        return $this;
+    }
+
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(?Game $game): static
+    {
+        $this->game = $game;
 
         return $this;
     }

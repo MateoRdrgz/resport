@@ -15,19 +15,19 @@ class Saison
     private int $id;
 
     #[ORM\Column(type:'datetime', nullable: true)]
-    private ?\DateTimeInterface $begin_at = null;
+    private ?\DateTimeInterface $beginAt = null;
 
     #[ORM\Column(type:'datetime', nullable: true)]
-    private ?\DateTimeInterface $finished_at = null;
+    private ?\DateTimeInterface $finishedAt = null;
 
     #[ORM\Column(type:'datetime')]
-    private \DateTimeInterface $modified_at;
+    private \DateTimeInterface $modifiedAt;
 
     #[ORM\Column(length: 255,type:'string')]
-    private string $full_name;
+    private string $fullName;
 
     #[ORM\ManyToOne(targetEntity: League::class)]
-    private League $leagueId;
+    private League $league;
 
     public function getId(): int
     {
@@ -43,60 +43,60 @@ class Saison
 
     public function getBeginAt(): ?\DateTimeInterface
     {
-        return $this->begin_at;
+        return $this->beginAt;
     }
 
-    public function setBeginAt(\DateTimeInterface $begin_at): static
+    public function setBeginAt(\DateTimeInterface $beginAt): static
     {
-        $this->begin_at = $begin_at;
+        $this->beginAt = $beginAt;
 
         return $this;
     }
 
     public function getFinishedAt(): ?\DateTimeInterface
     {
-        return $this->finished_at;
+        return $this->finishedAt;
     }
 
-    public function setFinishedAt(\DateTimeInterface $finished_at): static
+    public function setFinishedAt(\DateTimeInterface $finishedAt): static
     {
-        $this->finished_at = $finished_at;
+        $this->finishedAt = $finishedAt;
 
         return $this;
     }
 
     public function getModifiedAt(): \DateTimeInterface
     {
-        return $this->modified_at;
+        return $this->modifiedAt;
     }
 
-    public function setModifiedAt(\DateTimeInterface $modified_at): static
+    public function setModifiedAt(\DateTimeInterface $modifiedAt): static
     {
-        $this->modified_at = $modified_at;
+        $this->modifiedAt = $modifiedAt;
 
         return $this;
     }
 
     public function getFullName(): string
     {
-        return $this->full_name;
+        return $this->fullName;
     }
 
-    public function setFullName(?string $full_name): static
+    public function setFullName(?string $fullName): static
     {
-        $this->full_name = $full_name;
+        $this->fullName = $fullName;
 
         return $this;
     }
 
-    public function getLeagueId(): League
+    public function getLeague(): League
     {
-        return $this->leagueId;
+        return $this->league;
     }
 
-    public function setLeagueId(?League $leagueId): static
+    public function setLeague(?League $league): static
     {
-        $this->leagueId = $leagueId;
+        $this->league = $league;
 
         return $this;
     }

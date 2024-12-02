@@ -40,15 +40,15 @@ class Player
 
     #[ORM\ManyToOne(targetEntity: Country::class)]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Country $CountryId = null;
+    private ?Country $country = null;
 
     #[ORM\ManyToOne(targetEntity: Team::class)]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Team $teamId = null;
+    private ?Team $team = null;
 
     #[ORM\ManyToOne(targetEntity: Game::class)]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Game $GameId = null;
+    private ?Game $game = null;
 
     public function isActive(): bool
     {
@@ -147,36 +147,36 @@ class Player
 
     public function getCountryId(): ?Country
     {
-        return $this->CountryId;
+        return $this->country;
     }
 
-    public function setCountryId(?Country $CountryId): static
+    public function setCountryId(?Country $country): static
     {
-        $this->CountryId = $CountryId;
+        $this->country = $country;
 
         return $this;
     }
 
     public function getTeamId(): ?Team
     {
-        return $this->teamId;
+        return $this->team;
     }
 
-    public function setTeamId(?Team $teamId): static
+    public function setTeamId(?Team $team): static
     {
-        $this->teamId = $teamId;
+        $this->team = $team;
 
         return $this;
     }
 
     public function getGameId(): ?Game
     {
-        return $this->GameId;
+        return $this->game;
     }
 
-    public function setGameId(?Game $GameId): static
+    public function setGameId(?Game $game): static
     {
-        $this->GameId = $GameId;
+        $this->game = $game;
 
         return $this;
     }
