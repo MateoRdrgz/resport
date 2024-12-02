@@ -5,33 +5,38 @@ namespace App\Entity;
 use App\Repository\LeagueRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Table('leagues')]
 #[ORM\Entity(repositoryClass: LeagueRepository::class)]
 class League
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private int $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column(length: 255, type: 'string')]
+    private string $name;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true, type: 'string')]
     private ?string $image_url = null;
 
-    #[ORM\Column]
-    private ?\DateTime $modified_at = null;
+    #[ORM\Column(type: 'datetime')]
+    private \DateTimeInterface $modified_at;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $url = null;
 
-    #[ORM\Column]
-    private ?int $year = null;
+    #[ORM\ManyToOne(targetEntity: Game::class)]
+    private Game $game;
 
-    #[ORM\ManyToOne]
-    private ?Game $game = null;
+    public function __construct(string $name, \DateTime $modified_at, Game $game)
+    {
+        $this->name = $name;
+        $this->modified_at = $modified_at;
+        $this->game = $game;
+    }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -42,7 +47,7 @@ class League
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -66,7 +71,7 @@ class League
         return $this;
     }
 
-    public function getModifiedAt(): ?\DateTimeImmutable
+    public function getModifiedAt(): \DateTimeImmutable
     {
         return $this->modified_at;
     }
@@ -90,24 +95,12 @@ class League
         return $this;
     }
 
-    public function getYear(): ?int
-    {
-        return $this->year;
-    }
-
-    public function setYear(int $year): static
-    {
-        $this->year = $year;
-
-        return $this;
-    }
-
-    public function getGame(): ?Game
+    public function getGame(): Game
     {
         return $this->game;
     }
 
-    public function setGame(?Game $game): static
+    public function setGame(Game $game): static
     {
         $this->game = $game;
 

@@ -5,24 +5,27 @@ namespace App\Entity;
 use App\Repository\OpponentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Table('opponents')]
 #[ORM\Entity(repositoryClass: OpponentRepository::class)]
 class Opponent
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private int $id;
 
-    #[ORM\ManyToOne]
-    private ?Matchs $matchId = null;
+    #[ORM\ManyToOne(targetEntity: Matchs::class)]
+    private Matchs $matchId;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'], targetEntity: Team::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Team $opponentIdTeam = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'], targetEntity: Player::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Player $opponentIdPlayer = null;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -34,12 +37,12 @@ class Opponent
         return $this;
     }
 
-    public function getMatchId(): ?Matchs
+    public function getMatchId(): Matchs
     {
         return $this->matchId;
     }
 
-    public function setMatchId(?Matchs $matchId): static
+    public function setMatchId(Matchs $matchId): static
     {
         $this->matchId = $matchId;
 

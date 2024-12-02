@@ -11,25 +11,25 @@ class Saison
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private int $id;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type:'datetime', nullable: true)]
     private ?\DateTimeInterface $begin_at = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type:'datetime', nullable: true)]
     private ?\DateTimeInterface $finished_at = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $modified_at = null;
+    #[ORM\Column(type:'datetime')]
+    private \DateTimeInterface $modified_at;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $full_name = null;
+    #[ORM\Column(length: 255,type:'string')]
+    private string $full_name;
 
-    #[ORM\ManyToOne]
-    private ?League $leagueId = null;
+    #[ORM\ManyToOne(targetEntity: League::class)]
+    private League $leagueId;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -65,7 +65,7 @@ class Saison
         return $this;
     }
 
-    public function getModifiedAt(): ?\DateTimeInterface
+    public function getModifiedAt(): \DateTimeInterface
     {
         return $this->modified_at;
     }
@@ -77,7 +77,7 @@ class Saison
         return $this;
     }
 
-    public function getFullName(): ?string
+    public function getFullName(): string
     {
         return $this->full_name;
     }
@@ -89,7 +89,7 @@ class Saison
         return $this;
     }
 
-    public function getLeagueId(): ?League
+    public function getLeagueId(): League
     {
         return $this->leagueId;
     }

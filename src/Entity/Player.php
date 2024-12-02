@@ -11,22 +11,22 @@ class Player
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private int $id;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $active = null;
+    #[ORM\Column(type: 'boolean')]
+    private bool $active;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $name = null;
+    #[ORM\Column(length: 255,type:'string')]
+    private string $name;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTime $modifiedAt = null;
+    #[ORM\Column(type:'datetime')]
+    private ?\DateTimeInterface $modifiedAt;
 
     #[ORM\Column(nullable: true)]
     private ?int $age = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type:'datetime', nullable: true)]
     private ?\DateTimeInterface $birthday = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -38,44 +38,47 @@ class Player
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageUrl = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: Country::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Country $CountryId = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: Team::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Team $teamId = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: Game::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Game $GameId = null;
 
-    public function isActive(): ?bool
+    public function isActive(): bool
     {
         return $this->active;
     }
 
-    public function setActive(?bool $active): static
+    public function setActive(bool $active): static
     {
         $this->active = $active;
 
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): static
+    public function setName(string $name): static
     {
         $this->name = $name;
 
         return $this;
     }
-    public function getModifiedAt(): ?\DateTime
+    public function getModifiedAt(): \DateTime
     {
         return $this->modifiedAt;
     }
 
-    public function setModifiedAt(?\DateTimeImmutable $modifiedAt): static
+    public function setModifiedAt(\DateTimeImmutable $modifiedAt): static
     {
         $this->modifiedAt = $modifiedAt;
 

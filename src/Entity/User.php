@@ -8,31 +8,43 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
+#[ORM\Table(name: 'users')]
 class User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private int $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $username = null;
+    #[ORM\Column(length: 255,type: 'string')]
+    private string $username;
 
-    #[ORM\Column(length: 255)]
-    private ?string $role = null;
+    #[ORM\Column(length: 255,type: 'string')]
+    private string $role;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    #[ORM\Column(type: 'datetime')]
+    private \DateTimeInterface $created_at;
 
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
+    #[ORM\Column(length: 255,type: 'string')]
+    private string $password;
 
     /**
      * @var Collection<int, Player>
      */
     #[ORM\ManyToMany(targetEntity: Player::class)]
     private Collection $favorite_players;
+
+    /**
+     * @var Collection<int, Game>
+     */
+    #[ORM\ManyToMany(targetEntity: Game::class)]
+    private Collection $favorite_games;
+
+    /**
+     * @var Collection<int, Team>
+     */
+    #[ORM\ManyToMany(targetEntity: Team::class)]
+    private Collection $favorite_teams;
 
     public function __construct()
     {
@@ -119,6 +131,53 @@ class User
     public function removeFavoritePlayer(Player $favoritePlayer): static
     {
         $this->favorite_players->removeElement($favoritePlayer);
+
+        return $this;
+    }
+    /**
+     * @return Collection<int, Game>
+     */
+    public function getFavoriteGames(): Collection
+    {
+        return $this->favorite_games;
+    }
+
+    public function addFavoriteGame(Game $favoriteGame): static
+    {
+        if (!$this->favorite_games->contains($favoriteGame)) {
+            $this->favorite_games->add($favoriteGame);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteGame(Game $favoriteGame): static
+    {
+        $this->favorite_games->removeElement($favoriteGame);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Team>
+     */
+    public function getFavoriteTeams(): Collection
+    {
+        return $this->favorite_teams;
+    }
+
+    public function addFavoriteTeam(Team $favoriteTeam): static
+    {
+        if (!$this->favorite_teams->contains($favoriteTeam)) {
+            $this->favorite_teams->add($favoriteTeam);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteTeam(Team $favoriteTeam): static
+    {
+        $this->favorite_teams->removeElement($favoriteTeam);
 
         return $this;
     }

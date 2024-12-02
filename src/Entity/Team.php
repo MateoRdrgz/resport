@@ -10,25 +10,27 @@ class Team
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private int $id;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $name = null;
+    #[ORM\Column(length: 255,type:'string')]
+    private string $name;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, type: 'string')]
     private ?string $acronym = null;
 
-    #[ORM\Column(length: 512, nullable: true)]
+    #[ORM\Column(length: 512, nullable: true, type: 'string')]
     private ?string $imageUrl = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTime $modifiedAt = null;
+    #[ORM\Column(type:'datetime')]
+    private \DateTime $modifiedAt;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: Country::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Country $locationId = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: Game::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Game $gameId = null;
 
     public function getId(): ?int
@@ -36,12 +38,12 @@ class Team
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): static
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -77,7 +79,7 @@ class Team
         return $this->modifiedAt;
     }
 
-    public function setModifiedAt(?\DateTimeImmutable $modifiedAt): static
+    public function setModifiedAt(?\DateTime $modifiedAt): static
     {
         $this->modifiedAt = $modifiedAt;
 
